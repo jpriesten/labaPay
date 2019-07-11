@@ -1,5 +1,7 @@
 {
   "name": "labapay",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
