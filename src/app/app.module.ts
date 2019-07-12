@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from "@angular/forms";
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -12,19 +11,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from "@angular/common/http";
 import { NativeStorage } from "@ionic-native/native-storage/ngx";
 
-import { RegisterComponent } from "./components/auth/register/register.component";
-import { LoginComponent } from "./components/auth/login/login.component";
-import { LandingComponent } from "./components/landing/landing.component";
-
 @NgModule({
-  declarations: [AppComponent, LandingComponent, LoginComponent, RegisterComponent],
-  entryComponents: [LoginComponent, RegisterComponent],
+  declarations: [AppComponent],
+  entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule,
-    FormsModule
+    HttpClientModule
   ],
   providers: [
     StatusBar,

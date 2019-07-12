@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   async registerModal() {
     this.dismissLogin();
     const registerModal = await this._modalController.create({
-      component: ''
+      component: RegisterComponent
     });
     return await registerModal.present();
   }

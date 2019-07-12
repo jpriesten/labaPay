@@ -8,9 +8,14 @@ const routes: Routes = [
     redirectTo: 'landing',
     pathMatch: 'full'
   },
-  { path: 'landing', loadChildren: './components/landing/landing.component' },  
-  { path: 'login', loadChildren: './components/auth/login/login.component' },
-  { path: 'register', loadChildren: './components/auth/register/register.components' },
+  { path: 'landing', loadChildren: './components/landing/landing.module#LandingModule' },  
+  { path: 'login', loadChildren: './components/auth/login/login.module#LoginModule' },
+  { path: 'register', loadChildren: './components/auth/register/register.module#RegisterModule' },
+  {
+    path: 'dashboard',
+    loadChildren: './components/dashboard/dashboard.module#DashboardModule',
+    canActivate: [AuthGuard]
+  },
   {
     path: 'home',
     loadChildren: './home/home.module#HomePageModule',
