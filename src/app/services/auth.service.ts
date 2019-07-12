@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { EnvService } from './env.service';
 import { User } from '../models/user';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -12,39 +18,57 @@ export class AuthService {
 
   isLoggedIn = false;
   token:any;
+  httpOptions = {};
   constructor(
     private _http: HttpClient,
     private _storage: NativeStorage,
     private _env: EnvService,
-  ) { }
-  login(email: String, password: String) {
-    return this._http.post(this._env.API_URL + 'auth/login',
-      {email: email, password: password}
-    ).pipe(
-      tap(token => {
-        this._storage.setItem('token', token)
-        .then(
-          () => {
-            console.log('Token Stored');
-          },
-          error => console.error('Error storing item', error)
-        );
-        this.token = token;
-        this.isLoggedIn = true;
-        return token;
-      }),
-    );
+  ) {}
+
+  register(name: String, email: String, password: String): Promise<any> {
+    let body = {
+      "name": name, "email": email, "password": password
+    };
+
+    return new Promise((resolve, reject) => {
+      this._http.post<any>(this._env.API_URL + 'users/create', body, httpOptions).subscribe(response => {
+        if (response.token.error != false) {
+          reject(response.token);
+          return;
+        }
+        resolve(response.token);
+      });
+    });
   }
-  register(fName: String, lName: String, email: String, password: String) {
-    return this._http.post(this._env.API_URL + 'auth/register',
-      {fName: fName, lName: lName, email: email, password: password}
-    )
+
+  login(email: String, password: String): Promise<any> {
+    let body = {
+      "email": email, "password": password
+    };
+
+    return new Promise((resolve, reject) => {
+      this._http.post<any>(this._env.API_URL + 'users/login', body).pipe(
+        tap(token => {
+          this._storage.setItem('token', token)
+          .then(
+            () => {
+              console.log('Token Stored');
+            },
+            error => console.error('Error storing item', error)
+          );
+          this.token = token;
+          this.isLoggedIn = true;
+          resolve(token);
+        }),
+      );
+    }); 
   }
+  
   logout() {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this._http.get(this._env.API_URL + 'auth/logout', { headers: headers })
+    return this._http.get(this._env.API_URL + 'users/logout', { headers: headers })
     .pipe(
       tap(data => {
         this._storage.remove("token");
@@ -58,7 +82,7 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this._http.get<User>(this._env.API_URL + 'auth/user', { headers: headers })
+    return this._http.get<User>(this._env.API_URL + 'users/me', { headers: headers })
     .pipe(
       tap(user => {
         return user;

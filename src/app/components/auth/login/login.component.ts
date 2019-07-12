@@ -33,18 +33,18 @@ export class LoginComponent implements OnInit {
     });
     return await registerModal.present();
   }
-  login(form: NgForm) {
-    this._authService.login(form.value.email, form.value.password).subscribe(
-      data => {
-        this._alertService.presentToast("Logged In");
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        this.dismissLogin();
-        this._navCtrl.navigateRoot('/dashboard');
-      }
-    );
-  }
+  // login(form: NgForm) {
+  //   this._authService.login(form.value.email, form.value.password).subscribe(
+  //     data => {
+  //       this._alertService.successToast("Logged In");
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     },
+  //     () => {
+  //       this.dismissLogin();
+  //       this._navCtrl.navigateRoot('/dashboard');
+  //     }
+  //   );
+  // }
 }

@@ -7,12 +7,22 @@ import { ToastController } from '@ionic/angular';
 export class AlertService {
 
   constructor(private _toastController: ToastController) { }
-  async presentToast(message: any) {
+  async successToast(message: any) {
     const toast = await this._toastController.create({
       message: message,
-      duration: 2000,
+      duration: 5000,
       position: 'top',
-      color: 'dark'
+      color: 'success'
+    });
+    toast.present();
+  }
+
+  async errorToast(message: any) {
+    const toast = await this._toastController.create({
+      message: message,
+      duration: 5000,
+      position: 'top',
+      color: 'danger'
     });
     toast.present();
   }
