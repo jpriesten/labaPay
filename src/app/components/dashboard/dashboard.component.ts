@@ -10,7 +10,7 @@ import { User } from 'src/app/models/user';
 })
 export class DashboardComponent implements OnInit {
 
-  user: User;
+  public user: User;
 
   constructor(
     private _menu: MenuController,

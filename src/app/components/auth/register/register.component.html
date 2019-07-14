@@ -25,7 +25,7 @@
       <ion-label position="floating">Confirm password</ion-label>
       <ion-input type="password" formControlName="confirmPassword"></ion-input>
       <span *ngIf="registerFormGroup.hasError('notSame')">
-        <small>Passwords don't match</small>
+        <small style="color: red">Passwords don't match</small>
       </span>
     </ion-item>
   

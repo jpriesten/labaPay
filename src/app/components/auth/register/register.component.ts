@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { NgForm } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 
@@ -33,7 +32,8 @@ export class RegisterComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['']
-    }, {validator: this.checkPasswords})
+    }, {validator: this.checkPasswords});
+
   }
 
   get regForm() { return this.registerFormGroup.controls; }
@@ -64,11 +64,14 @@ export class RegisterComponent implements OnInit {
       console.log(registeredUser);
       this._alertService.successToast("Account created successfully!");
       // Log user in
-      
+      let loggedInUser = await this._authService.login(this.regForm.email.value, this.regForm.password.value);
+      console.log(loggedInUser);
+      this.dismissRegister();
+      this._navCtrl.navigateRoot('/dashboard');
       
     } catch (error) {
       console.error(error);
-      if(error.results.code == 11000){
+      if(error.results.code && error.results.code == 11000){
         this._alertService.errorToast("Account already exist!");
       } else {
         this._alertService.errorToast(error.results.message);

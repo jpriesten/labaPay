@@ -47,20 +47,23 @@ export class AuthService {
     };
 
     return new Promise((resolve, reject) => {
-      this._http.post<any>(this._env.API_URL + 'users/login', body).pipe(
-        tap(token => {
-          this._storage.setItem('token', token)
-          .then(
-            () => {
-              console.log('Token Stored');
-            },
-            error => console.error('Error storing item', error)
-          );
-          this.token = token;
-          this.isLoggedIn = true;
-          resolve(token);
-        }),
-      );
+      this._http.post<any>(this._env.API_URL + 'users/login', body, httpOptions).subscribe(response => {
+        if(response.token.loginToken.error != false) {
+          reject(response.token);
+          return;
+        }
+        this._storage.setItem('token', response.token.loginToken.results).then(() => {
+            console.log('Token Stored');
+          },
+          error => {
+            localStorage.setItem('token', response.token.loginToken.results);
+            console.error('Error storing item', error);}
+        );
+        
+        this.token = response.token.loginToken.results;
+        this.isLoggedIn = true;
+        resolve(response.token);
+      });
     }); 
   }
   

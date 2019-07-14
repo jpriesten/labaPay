@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { RegisterComponent } from '../register/register.component';
-import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -12,15 +13,25 @@ import { AlertService } from 'src/app/services/alert.service';
 })
 export class LoginComponent implements OnInit {
 
+  loginFormGroup: FormGroup;
+
   constructor(
     private _modalController: ModalController,
     private _authService: AuthService,
     private _navCtrl: NavController,
-    private _alertService: AlertService
+    private _alertService: AlertService,
+    private _formBuilder: FormBuilder
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
 
+    this.loginFormGroup = this._formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  get logForm() { return this.loginFormGroup.controls; }
   // Dismiss Login Modal
   dismissLogin() {
     this._modalController.dismiss();
@@ -33,18 +44,17 @@ export class LoginComponent implements OnInit {
     });
     return await registerModal.present();
   }
-  // login(form: NgForm) {
-  //   this._authService.login(form.value.email, form.value.password).subscribe(
-  //     data => {
-  //       this._alertService.successToast("Logged In");
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     },
-  //     () => {
-  //       this.dismissLogin();
-  //       this._navCtrl.navigateRoot('/dashboard');
-  //     }
-  //   );
-  // }
+
+  async login(){
+    try {
+      let loggedInUser = await this._authService.login(this.logForm.email.value, this.logForm.password.value);
+      console.log("Logged: ", loggedInUser.user.results);
+      this._alertService.successToast("Log in successfully!");
+      this.dismissLogin();
+      this._navCtrl.navigateRoot('/dashboard');
+    } catch (error) {
+      console.error("Error: ", error);
+      this._alertService.errorToast(error.results);
+    }
+  }
 }

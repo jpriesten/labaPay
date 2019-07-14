@@ -53,7 +53,7 @@ export class AppComponent {
   logout() {
     this._authService.logout().subscribe(
       data => {
-        this._alertService.presentToast(data['message']);        
+        this._alertService.successToast(data['message']);        
       },
       error => {
         console.log(error);
