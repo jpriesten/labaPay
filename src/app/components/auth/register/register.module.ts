@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RegisterComponent } from "./register.component";
 
 @NgModule({
-  declarations: [RegisterComponent],
+  declarations: [],
   imports: [
     CommonModule,
     IonicModule,

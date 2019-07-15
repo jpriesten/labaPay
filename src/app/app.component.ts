@@ -50,17 +50,18 @@ export class AppComponent {
   }
 
   // When Logout Button is pressed 
-  logout() {
-    this._authService.logout().subscribe(
-      data => {
-        this._alertService.successToast(data['message']);        
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        this._navCtrl.navigateRoot('/landing');
+  async logout() {
+    try {
+      let logoutResponse = await this._authService.logout();
+      console.log(logoutResponse);
+      this._alertService.successToast(logoutResponse.results);
+      this._navCtrl.navigateRoot('/landing');
+    } catch (error) {
+      console.error(error);
+      if(error.code == 13579){
+        this._navCtrl.navigateRoot('/login');
       }
-    );
+      this._alertService.errorToast(error);        
+    }
   }
 }

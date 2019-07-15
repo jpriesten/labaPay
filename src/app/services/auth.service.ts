@@ -48,7 +48,11 @@ export class AuthService {
 
     return new Promise((resolve, reject) => {
       this._http.post<any>(this._env.API_URL + 'users/login', body, httpOptions).subscribe(response => {
-        if(response.token.loginToken.error != false) {
+        if(response.token.error == true) {
+          reject(response.token);
+          return;
+        }
+        if(response.token.loginToken.error == true) {
           reject(response.token);
           return;
         }
@@ -67,23 +71,40 @@ export class AuthService {
     }); 
   }
   
-  logout() {
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+  logout(): Promise<any> {
+    this._storage.getItem("token").then(token => {
+      this.token = token;
+      console.log("Retrieved token from native: ", token);
+    }).catch(error => {
+      console.log("Error fetching token from native: ", error);
+      this.token = localStorage.getItem("token");
+      console.log("Retrieved token from web: ", this.token);
     });
-    return this._http.get(this._env.API_URL + 'users/logout', { headers: headers })
-    .pipe(
-      tap(data => {
-        this._storage.remove("token");
+
+    let HTTPOptions = new HttpHeaders().set("Authorization", "Bearer " + this.token);
+    console.log(HTTPOptions);
+    return new Promise((resolve, reject) => {
+      this._http.post<any>(this._env.API_URL + 'users/logout', {}, {headers: HTTPOptions}).subscribe(response => {
+        if(response['error'] != false) {
+          reject(response);
+          return;
+        }
+        this._storage.remove("token").then(() => {
+          console.log("Token removed");
+  
+        }).catch(error => {
+          localStorage.removeItem('token');
+          console.error('Removing item', error);
+        });
         this.isLoggedIn = false;
         delete this.token;
-        return data;
-      })
-    )
+        resolve(response);
+      });
+    }); 
   }
   user() {
     const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+      'Authorization': this.token
     });
     return this._http.get<User>(this._env.API_URL + 'users/me', { headers: headers })
     .pipe(

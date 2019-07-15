@@ -7,7 +7,7 @@ import { FormsModule } from "@angular/forms";
 import { LoginComponent } from "./login.component";
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [],
   imports: [
     CommonModule,
     IonicModule,
