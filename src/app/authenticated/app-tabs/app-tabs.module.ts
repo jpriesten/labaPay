@@ -10,8 +10,28 @@ import { AppTabsPage } from './app-tabs.page';
 const routes: Routes = [
   {
     path: '',
-    component: AppTabsPage
+    component: AppTabsPage,
+    children: [
+      {
+        path: 'profile',
+        loadChildren: '../profile/profile.module#ProfilePageModule'
+      },
+      {
+        path: 'send',
+        loadChildren: '../send/send.module#SendPageModule'
+      },
+      {
+        path: 'settings',
+        loadChildren: '../settings/settings.module#SettingsPageModule'
+      },
+      {
+        path: '',
+        redirectTo: 'send',
+        pathMatch: 'full'
+      }
+    ]
   }
+  
 ];
 
 @NgModule({

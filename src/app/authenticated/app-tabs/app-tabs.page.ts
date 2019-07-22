@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, MenuController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '../../services/alert.service';
 
@@ -13,10 +13,14 @@ export class AppTabsPage implements OnInit {
   constructor(
     private _authService: AuthService,
     private _navCtrl: NavController,
-    private _alertService: AlertService
-  ) { }
+    private _alertService: AlertService,
+    private _menu: MenuController
+  ) { 
+    
+  }
 
   ngOnInit() {
+    this._menu.enable(false);
   }
 
   // When Logout Button is pressed 

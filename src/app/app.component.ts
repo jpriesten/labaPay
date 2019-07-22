@@ -6,12 +6,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
 import { AlertService } from './services/alert.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  public appPages = [
+  
+  public profileItems = [
     {
       title: 'Dashboard',
       url: '/dashboard',

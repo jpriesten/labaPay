@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from "@ionic/angular";
 
 @Component({
   selector: 'app-profile',
@@ -7,27 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  public profilePages = [
-    {
-      title: 'Dashboard',
-      url: '/dashboard',
-      icon: 'home'
-    },
-    {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    }
-  ];
-
-  constructor() { }
+  constructor(
+    private _menu: MenuController
+  ) {}
 
   ngOnInit() {
+    this._menu.enable(true);
   }
 
 }

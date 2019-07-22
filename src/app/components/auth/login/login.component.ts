@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       console.log("Logged: ", loggedInUser.user.results);
       this._alertService.successToast("Log in successfully!");
       this.dismissLogin();
-      this._navCtrl.navigateRoot('/dashboard');
+      this._navCtrl.navigateRoot('/home');
     } catch (error) {
       console.error("Error: ", error);
       this._alertService.errorToast(error.results);

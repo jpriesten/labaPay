@@ -17,19 +17,14 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'homes',
-    loadChildren: './home/home.module#HomePageModule',
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'list',
-    loadChildren: './list/list.module#ListPageModule', 
+    loadChildren: './authenticated/profile/list/list.module#ListPageModule', 
     canActivate: [AuthGuard]
   },
-  { path: 'home', loadChildren: './authenticated/app-tabs/app-tabs.module#AppTabsPageModule'
-    // canActivate: [AuthGuard]  
+  { path: 'home', loadChildren: './authenticated/app-tabs/app-tabs.module#AppTabsPageModule',
+    canActivate: [AuthGuard]  
   },
-  { path: 'profile', loadChildren: './authenticated/profile/profile.module#ProfilePageModule' }
+  
 ];
 
 @NgModule({

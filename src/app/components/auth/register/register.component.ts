@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
       let loggedInUser = await this._authService.login(this.regForm.email.value, this.regForm.password.value);
       console.log(loggedInUser);
       this.dismissRegister();
-      this._navCtrl.navigateRoot('/dashboard');
+      this._navCtrl.navigateRoot('/home');
       
     } catch (error) {
       console.error(error);
@@ -78,28 +78,5 @@ export class RegisterComponent implements OnInit {
       }
     }
   }
-  // register() {
-  //   this._authService.register(this.regForm.name.value, this.regForm.email.value, this.regForm.password.value).subscribe(
-  //     data => {
-  //       this._authService.login(this.regForm.email.value, this.regForm.password.value).subscribe(
-  //         data => {
-  //         },
-  //         error => {
-  //           console.log(error);
-  //         },
-  //         () => {
-  //           this.dismissRegister();
-  //           this._navCtrl.navigateRoot('/dashboard');
-  //         }
-  //       );
-  //       this._alertService.presentToast(data['message']);
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     },
-  //     () => {
-        
-  //     }
-  //   );
-  // }
+  
 }
