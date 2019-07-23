@@ -46,7 +46,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       // Commenting splashScreen Hide, so it won't hide splashScreen before auth check
-      // this.splashScreen.hide();
+      this.splashScreen.show();
       this._authService.getToken();
     });
   }
