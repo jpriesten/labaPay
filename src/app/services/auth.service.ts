@@ -124,8 +124,15 @@ export class AuthService {
         }
       },
       error => {
-        this.token = null;
-        this.isLoggedIn=false;
+        console.log(error);
+        if(localStorage.getItem('token')) {
+          this.token = localStorage.getItem('token');
+          this.isLoggedIn = true;
+        } else {
+          this.token = null;
+          this.isLoggedIn=false;
+        }
+        
       }
     );
   }
