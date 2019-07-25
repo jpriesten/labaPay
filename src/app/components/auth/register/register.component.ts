@@ -34,6 +34,8 @@ export class RegisterComponent implements OnInit {
       confirmPassword: ['']
     }, {validator: this.checkPasswords});
 
+    this._alertService.processLoader('Please wait');
+
   }
 
   get regForm() { return this.registerFormGroup.controls; }
@@ -60,21 +62,25 @@ export class RegisterComponent implements OnInit {
 
   async register() {
     try {
+      this._alertService.loader.present();
       let registeredUser = await this._authService.register(this.regForm.name.value, this.regForm.email.value, this.regForm.password.value);
       console.log(registeredUser);
       this._alertService.successToast("Account created successfully!");
       // Log user in
       let loggedInUser = await this._authService.login(this.regForm.email.value, this.regForm.password.value);
       console.log(loggedInUser);
+      this._alertService.loader.dismiss();
       this.dismissRegister();
       this._navCtrl.navigateRoot('/home');
       
     } catch (error) {
+      this._alertService.loader.dismiss();
       console.error(error);
       if(error.results.code && error.results.code == 11000){
         this._alertService.errorToast("Account already exist!");
       } else {
-        this._alertService.errorToast(error.results.message);
+        console.error(error.results);
+        this._alertService.errorToast(error.results);
       }
     }
   }

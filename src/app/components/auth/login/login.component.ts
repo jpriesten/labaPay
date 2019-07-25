@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController} from '@ionic/angular';
 import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertService } from 'src/app/services/alert.service';
@@ -14,7 +14,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 export class LoginComponent implements OnInit {
 
   loginFormGroup: FormGroup;
-
+  
   constructor(
     private _modalController: ModalController,
     private _authService: AuthService,
@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    this._alertService.processLoader('Please wait');
   }
 
   get logForm() { return this.loginFormGroup.controls; }
@@ -45,15 +47,18 @@ export class LoginComponent implements OnInit {
     return await registerModal.present();
   }
 
-  async login(){
+  async login(){ 
     try {
+      this._alertService.loader.present();
       let loggedInUser = await this._authService.login(this.logForm.email.value, this.logForm.password.value);
       console.log("Logged: ", loggedInUser.user.results);
+      this._alertService.loader.dismiss();
       this._alertService.successToast("Log in successfully!");
       this.dismissLogin();
       this._navCtrl.navigateRoot('/home');
     } catch (error) {
       console.error("Error: ", error);
+      this._alertService.loader.dismiss();
       this._alertService.errorToast(error.results);
     }
   }

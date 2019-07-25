@@ -23,15 +23,16 @@ export class SettingsPage implements OnInit {
   async logout() {
     try {
       let logoutResponse = await this._authService.logout();
-      console.log(logoutResponse);
+      console.log("Value: ", logoutResponse);
       this._alertService.successToast(logoutResponse.results);
       this._navCtrl.navigateRoot('/landing');
     } catch (error) {
-      console.error(error);
+      console.error("Error: ", error);
       if(error.code == 13579){
-        this._navCtrl.navigateRoot('/login');
+        this._alertService.errorToast(`${error.results}: ${error.message}`);        
+        this._navCtrl.navigateRoot('/landing');
+        return;
       }
-      this._alertService.errorToast(error);        
     }
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { HTTP } from '@ionic-native/http/ngx';
 import { EnvService } from './env.service';
 import { User } from '../models/user';
 
@@ -23,6 +24,7 @@ export class AuthService {
     private _http: HttpClient,
     private _storage: NativeStorage,
     private _env: EnvService,
+    private _nativeHTTP: HTTP
   ) {}
 
   register(name: String, email: String, password: String): Promise<any> {
@@ -46,16 +48,17 @@ export class AuthService {
       "email": email, "password": password
     };
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => { 
+
       this._http.post<any>(this._env.API_URL + 'users/login', body, httpOptions).subscribe(response => {
         if(response.token.error == true) {
-          reject(response.token);
+          reject(response.token); 
           return;
         }
         if(response.token.loginToken.error == true) {
           reject(response.token);
           return;
-        }
+        } 
         this._storage.setItem('token', response.token.loginToken.results).then(() => {
             console.log('Token Stored');
           },
@@ -67,6 +70,11 @@ export class AuthService {
         this.token = response.token.loginToken.results;
         this.isLoggedIn = true;
         resolve(response.token);
+      }, errorResponse => {
+        console.log(errorResponse);
+        console.log(this._http.options); 
+        // reject(errorResponse);
+        return;
       });
     }); 
   }
@@ -82,23 +90,21 @@ export class AuthService {
     });
 
     let HTTPOptions = new HttpHeaders().set("Authorization", "Bearer " + this.token);
-    console.log(HTTPOptions);
     return new Promise((resolve, reject) => {
       this._http.post<any>(this._env.API_URL + 'users/logout', {}, {headers: HTTPOptions}).subscribe(response => {
         if(response['error'] != false) {
           reject(response);
           return;
         }
-        this._storage.remove("token").then(() => {
-          console.log("Token removed");
-  
-        }).catch(error => {
-          localStorage.removeItem('token');
-          console.error('Removing item', error);
-        });
-        this.isLoggedIn = false;
-        delete this.token;
+        this.removeToken();
         resolve(response);
+      }, errorResponse => {
+        console.log("Errors: ", errorResponse);
+        if(errorResponse.error.error != false) {
+          this.removeToken();
+          reject(errorResponse.error);
+          return;
+        }
       });
     }); 
   }
@@ -135,5 +141,17 @@ export class AuthService {
         
       }
     );
+  }
+
+  removeToken() {
+    this._storage.remove("token").then(() => {
+      console.log("Token removed");
+
+    }).catch(error => {
+      localStorage.removeItem('token');
+      console.error('Removing item', error);
+    });
+    this.isLoggedIn = false;
+    delete this.token;
   }
 }
