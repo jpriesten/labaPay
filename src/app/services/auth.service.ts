@@ -17,9 +17,11 @@ const httpOptions = {
 })
 export class AuthService {
 
-  isLoggedIn = false;
-  token:any;
-  httpOptions = {};
+  public isLoggedIn = false;
+  public token:any;
+  public httpOptions = {};
+  public tokenExpired = {};
+
   constructor(
     private _http: HttpClient,
     private _storage: NativeStorage,
@@ -73,7 +75,7 @@ export class AuthService {
       }, errorResponse => {
         console.log(errorResponse);
         console.log(this._http.options); 
-        // reject(errorResponse);
+        reject(errorResponse);
         return;
       });
     }); 
@@ -101,6 +103,7 @@ export class AuthService {
       }, errorResponse => {
         console.log("Errors: ", errorResponse);
         if(errorResponse.error.error != false) {
+          this.tokenExpired = errorResponse.error;
           this.removeToken();
           reject(errorResponse.error);
           return;
@@ -108,17 +111,27 @@ export class AuthService {
       });
     }); 
   }
-  user() {
+
+  user(): Promise<any>  {
     const headers = new HttpHeaders({
       'Authorization': this.token
     });
-    return this._http.get<User>(this._env.API_URL + 'users/me', { headers: headers })
-    .pipe(
-      tap(user => {
-        return user;
-      })
-    )
+    return new Promise((resolve, reject) => { 
+      this._http.get<User>(this._env.API_URL + 'users/me', { headers: headers }).subscribe(response => {
+        if(response['error'] != false) {
+          reject(response);
+          return;
+        }
+        resolve(response);
+      }, errorResponse => {
+        console.log("Errors: ", errorResponse);
+        this.tokenExpired = errorResponse.error;
+        reject(errorResponse.error);
+        return;
+      });
+    });
   }
+
   getToken() {
     return this._storage.getItem('token').then(
       data => {

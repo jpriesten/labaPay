@@ -3,4 +3,7 @@ export class User {
     name: String;
     email: String;
     password: String;
+    phoneNumber: Number;
+    address: String;
+    country: String;
 }

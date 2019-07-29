@@ -21,12 +21,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {}
 
-  ionViewWillEnter() {
-    this._authService.user().subscribe(
-      user => {
-        this.user = user;
-      }
-    );
+  async ionViewWillEnter() {
+    try {
+      let response = await this._authService.user();
+      this.user = response.results; 
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 }
