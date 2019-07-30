@@ -1,15 +1,16 @@
 <ion-header>
 
-  <ion-fab vertical="top" horizontal="start" slot="fixed">
-    <ion-fab-button size="small" color="light" href="/profile" style="box-shadow: none;">
-      <img src="/assets/images/male.png">
-    </ion-fab-button>
-  </ion-fab>
-
   <ion-toolbar>
+
+    <ion-item href="/profile" slot="start">
+      <ion-avatar>
+        <img src="/assets/images/male.png">
+      </ion-avatar>
+    </ion-item>
+
     <ion-buttons slot="end">
       <ion-button href="/settings">
-        <ion-icon slot="icon-only" name="cog"></ion-icon>
+        <ion-icon slot="icon-only" name="cog" color="dark"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -21,7 +22,7 @@
   <!-- fab placed to the bottom start -->
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button size="small" color="danger">
-      <ion-icon name="send" size="small"></ion-icon>
+      <ion-icon name="send"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
