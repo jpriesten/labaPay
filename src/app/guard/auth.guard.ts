@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     private _alertService: AlertService
   ) {
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDM2MzhjYzhhOGEzYzY4NzFmMmMzMjgiLCJpYXQiOjE1NjQ0Mjc0MDAsImV4cCI6MTU2NDUxMzgwMH0.pEWSqKWhe-c5gH8eufUXz93qgE4_do9tQjkWzFk4qCk
-    localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDM2MzhjYzhhOGEzYzY4NzFmMmMzMjgiLCJpYXQiOjE1NjQzNDM1NzYsImV4cCI6MTU2NDQyOTk3Nn0.rC52a0d44g9JPfoRb1FF0iTANdQO_YGQZi3aVpmTWE8');
+    // localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDM2MzhjYzhhOGEzYzY4NzFmMmMzMjgiLCJpYXQiOjE1NjQzNDM1NzYsImV4cCI6MTU2NDQyOTk3Nn0.rC52a0d44g9JPfoRb1FF0iTANdQO_YGQZi3aVpmTWE8');
   }
   canActivate(
     next: ActivatedRouteSnapshot,
