@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       { 
         path: 'new-card', 
-        loadChildren: './profile/new-card/new-card.module#NewCardPageModule'
+        loadChildren: './authenticated/profile/new-card/new-card.module#NewCardPageModule'
       },
     ]
   }
