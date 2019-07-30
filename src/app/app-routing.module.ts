@@ -5,25 +5,32 @@ import { AuthGuard } from "./guard/auth.guard";
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'send',
     pathMatch: 'full'
   },
   { path: 'landing', loadChildren: './components/landing/landing.module#LandingModule' },  
   { path: 'login', loadChildren: './components/auth/login/login.module#LoginModule' },
   { path: 'register', loadChildren: './components/auth/register/register.module#RegisterModule' },
-  {
-    path: 'dashboard',
-    loadChildren: './components/dashboard/dashboard.module#DashboardModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'list',
-    loadChildren: './authenticated/profile/list/list.module#ListPageModule', 
-    canActivate: [AuthGuard]
-  },
+
+  // Guarded routes
   { path: 'home', loadChildren: './authenticated/app-tabs/app-tabs.module#AppTabsPageModule',
     canActivate: [AuthGuard]  
   },
+  {
+    path: 'profile',
+    loadChildren: './authenticated/profile/profile.module#ProfilePageModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'send',
+    loadChildren: './authenticated/send/send.module#SendPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'settings',
+    loadChildren: './authenticated/settings/settings.module#SettingsPageModule',
+    canActivate: [AuthGuard]
+  }
   
 ];
 

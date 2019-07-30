@@ -26,6 +26,7 @@ export class AuthGuard implements CanActivate {
       console.log("Expired", this._authService.tokenExpired);
       this._alertService.errorToast(`${expired['results']}: ${expired['message']}`);
       this._authService.removeToken();
+      return false;
     }
 
     if (this._authService.isLoggedIn) {

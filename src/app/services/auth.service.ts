@@ -166,5 +166,6 @@ export class AuthService {
     });
     this.isLoggedIn = false;
     delete this.token;
+    delete this.tokenExpired;
   }
 }

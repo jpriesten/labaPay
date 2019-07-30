@@ -17,7 +17,7 @@ const routes: Routes = [
         loadChildren: '../profile/profile.module#ProfilePageModule'
       },
       {
-        path: 'send',
+        path: 'sends',
         loadChildren: '../send/send.module#SendPageModule'
       },
       {
@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'send',
+        redirectTo: 'sends',
         pathMatch: 'full'
       }
     ]

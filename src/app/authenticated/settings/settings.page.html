@@ -1,18 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button size="small" expand="block" color="success" strong="true"
+        (click)="logout()">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="start" name="log-out"></ion-icon>
+        <ion-label>
+          Logout
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
    
-  <ion-button size="small" expand="block" color="danger" strong="true"
-    (click)="logout()">
-    <ion-ripple-effect></ion-ripple-effect>
-    <ion-icon slot="start" name="log-out"></ion-icon>
-    <ion-label>
-      Logout
-    </ion-label>
-  </ion-button>
+  
 
 </ion-content>

@@ -12,24 +12,6 @@ import { AlertService } from './services/alert.service';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  
-  public profileItems = [
-    {
-      title: 'Dashboard',
-      url: '/dashboard',
-      icon: 'home'
-    },
-    {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    }
-  ];
 
   constructor(
     private platform: Platform,
