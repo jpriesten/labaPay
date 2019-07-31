@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
       console.log(loggedInUser);
       this._alertService.loader.dismiss();
       this.dismissRegister();
-      this._navCtrl.navigateRoot('/home');
+      this._navCtrl.navigateRoot('/send');
       
     } catch (error) {
       this._alertService.loader.dismiss();

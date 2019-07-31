@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       this._alertService.loader.dismiss();
       this._alertService.successToast("Log in successfully!");
       this.dismissLogin();
-      this._navCtrl.navigateRoot('/home');
+      this._navCtrl.navigateRoot('/send');
     } catch (error) {
       console.error("Error: ", error);
       this._alertService.loader.dismiss();

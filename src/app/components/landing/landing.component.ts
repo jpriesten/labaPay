@@ -23,7 +23,7 @@ export class LandingComponent implements OnInit {
   ionViewWillEnter() {
     this._authService.getToken().then(() => {
       if(this._authService.isLoggedIn) {
-        this._navCtrl.navigateRoot('/dashboard');
+        this._navCtrl.navigateRoot('/send');
       }
     });
   }
