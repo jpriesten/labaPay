@@ -1,8 +1,8 @@
 {
   "name": "labapay",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "TjeY",
+  "homepage": "https://github.com/jpriesten",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,7 +19,9 @@
     "@angular/http": "^7.2.2",
     "@angular/platform-browser": "^7.2.2",
     "@angular/platform-browser-dynamic": "^7.2.2",
+    "@angular/pwa": "^0.12.4",
     "@angular/router": "^7.2.2",
+    "@angular/service-worker": "^7.2.2",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/http": "^5.10.0",
     "@ionic-native/native-storage": "^5.9.0",
