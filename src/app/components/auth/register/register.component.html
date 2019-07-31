@@ -4,20 +4,40 @@
     <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content padding>
+<ion-content fullscreen>
   <form [formGroup]="registerFormGroup"> 
     <ion-item>
-        <ion-label position="floating">First Name</ion-label>
+        <ion-label position="floating">First Name <small style="color: red">*</small></ion-label>
         <ion-input formControlName="name"></ion-input>
     </ion-item>
   
     <ion-item>
-      <ion-label position="floating">Email</ion-label>
+      <ion-label position="floating">Email <small style="color: red">*</small></ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
     </ion-item>
   
     <ion-item>
-      <ion-label position="floating">Password</ion-label>
+        <ion-label position="floating">Country <small style="color: red">*</small></ion-label>
+        <ion-input formControlName="country"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">City <small style="color: red">*</small></ion-label>
+        <ion-input formControlName="city"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Address <small style="color: red">*</small></ion-label>
+        <ion-input formControlName="address"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Phone Number <small style="color: red">*</small></ion-label>
+        <ion-input formControlName="phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password <small style="color: red">*</small></ion-label>
       <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
 

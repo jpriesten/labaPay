@@ -24,13 +24,11 @@ export class ProfilePage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    try {
-      let response = await this._auth.user();
+    this._auth.user().then(response => {
       this.loggedInUser = response.results;
       console.log(this.loggedInUser);
-    } catch (error) {
+    }).catch(error => {
       console.log(error);
-      // this._alert.errorToast(error.message);
-    }
+    });
   }
 }

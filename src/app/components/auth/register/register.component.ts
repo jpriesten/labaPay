@@ -31,7 +31,11 @@ export class RegisterComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
-      confirmPassword: ['']
+      confirmPassword: [''],
+      country: ['', Validators.required],
+      city: ['', Validators.required],
+      phone: ['', Validators.required],
+      address: ['', Validators.required]
     }, {validator: this.checkPasswords});
 
     this._alertService.processLoader('Please wait');
@@ -41,10 +45,10 @@ export class RegisterComponent implements OnInit {
   get regForm() { return this.registerFormGroup.controls; }
 
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-  let pass = group.controls.password.value;
-  let confirmPass = group.controls.confirmPassword.value;
+    let pass = group.controls.password.value;
+    let confirmPass = group.controls.confirmPassword.value;
 
-  return pass === confirmPass ? null : { notSame: true }     
+    return pass === confirmPass ? null : { notSame: true }     
   }
 
   // Dismiss Register Modal
@@ -63,7 +67,9 @@ export class RegisterComponent implements OnInit {
   async register() {
     try {
       this._alertService.loader.present();
-      let registeredUser = await this._authService.register(this.regForm.name.value, this.regForm.email.value, this.regForm.password.value);
+      let registeredUser = await this._authService.register(this.regForm.name.value, this.regForm.email.value, 
+        this.regForm.password.value, this.regForm.country.value, this.regForm.phone.value, this.regForm.city.value, 
+        this.regForm.address.value);
       console.log(registeredUser);
       this._alertService.successToast("Account created successfully!");
       // Log user in

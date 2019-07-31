@@ -6,4 +6,5 @@ export class User {
     phoneNumber: Number;
     address: String;
     country: String;
+    city: String;
 }
