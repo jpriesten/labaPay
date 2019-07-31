@@ -22,6 +22,14 @@
     </ion-item>
 
     <ion-item>
+      <ion-label position="floating">Gender <small style="color: red">*</small></ion-label>
+      <ion-select interface="popover" formControlName="gender">
+        <ion-select-option value="f">Female</ion-select-option>
+        <ion-select-option value="m">Male</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
         <ion-label position="floating">City <small style="color: red">*</small></ion-label>
         <ion-input formControlName="city"></ion-input>
     </ion-item>

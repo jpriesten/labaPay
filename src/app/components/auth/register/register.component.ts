@@ -35,7 +35,8 @@ export class RegisterComponent implements OnInit {
       country: ['', Validators.required],
       city: ['', Validators.required],
       phone: ['', Validators.required],
-      address: ['', Validators.required]
+      address: ['', Validators.required],
+      gender: ['', Validators.required]
     }, {validator: this.checkPasswords});
 
     this._alertService.processLoader('Please wait');
@@ -69,7 +70,7 @@ export class RegisterComponent implements OnInit {
       this._alertService.loader.present();
       let registeredUser = await this._authService.register(this.regForm.name.value, this.regForm.email.value, 
         this.regForm.password.value, this.regForm.country.value, this.regForm.phone.value, this.regForm.city.value, 
-        this.regForm.address.value);
+        this.regForm.address.value, this.regForm.gender.value);
       console.log(registeredUser);
       this._alertService.successToast("Account created successfully!");
       // Log user in

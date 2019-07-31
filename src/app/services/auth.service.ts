@@ -29,9 +29,9 @@ export class AuthService {
     private _nativeHTTP: HTTP
   ) {}
 
-  register(name: String, email: String, password: String, country: String, phoneNumber: Number, city: String, address: String): Promise<any> {
+  register(name: String, email: String, password: String, country: String, phoneNumber: Number, city: String, address: String, gender: String): Promise<any> {
     let body = {
-      "name": name, "email": email, "password": password, "country": country, "city": city, "address": address, "phoneNumber": phoneNumber
+      "name": name, "email": email, "password": password, "country": country, "city": city, "address": address, "phoneNumber": phoneNumber, "gender": gender
     };
 
     return new Promise((resolve, reject) => {
