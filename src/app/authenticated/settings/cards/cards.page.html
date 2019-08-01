@@ -1,0 +1,31 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="settings"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Cards</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button size="small" expand="block" strong="true" [routerLink]="['/cards/new']">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="icon-only" name="add" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding> 
+
+  <ion-item [routerLink]="['/cards/new']"  button detail lines="none" expand="full">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-text color="dark">
+      <h5>
+        No card has been created yet, tab the here to add a new card
+      </h5>
+    </ion-text>
+  </ion-item>
+  
+
+</ion-content>
+  

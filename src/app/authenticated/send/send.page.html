@@ -2,14 +2,16 @@
 
   <ion-toolbar>
 
-    <ion-item href="/profile" slot="start" button="true" detail="false" lines="none">
+    <ion-item [routerLink]="['/profile']" slot="start" button="true" detail="false" lines="none">
+      <ion-ripple-effect></ion-ripple-effect>
       <ion-avatar>
         <img src="/assets/images/male.png">
       </ion-avatar>
     </ion-item>
 
     <ion-buttons slot="end">
-      <ion-button href="/settings">
+      <ion-button [routerLink]="['/settings']">
+        <ion-ripple-effect></ion-ripple-effect>
         <ion-icon slot="icon-only" name="cog" color="dark"></ion-icon>
       </ion-button>
     </ion-buttons>

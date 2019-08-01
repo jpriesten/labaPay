@@ -8,6 +8,7 @@ const routes: Routes = [
     redirectTo: 'send',
     pathMatch: 'full'
   },
+  
   { path: 'landing', loadChildren: './components/landing/landing.module#LandingModule' },  
   { path: 'login', loadChildren: './components/auth/login/login.module#LoginModule' },
   { path: 'register', loadChildren: './components/auth/register/register.module#RegisterModule' },
@@ -30,7 +31,22 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: './authenticated/settings/settings.module#SettingsPageModule',
     canActivate: [AuthGuard]
-  }
+  },
+  { 
+    path: 'cards', 
+    children: [
+      {
+        path: '',
+        loadChildren: './authenticated/settings/cards/cards.module#CardsPageModule'
+      },
+      {
+        path: 'new',
+        loadChildren: './authenticated/settings/cards/new-card/new-card.module#NewCardPageModule',
+      }
+    ]
+  },
+
+  { path: '**', redirectTo: 'send', pathMatch: 'full' }
   
 ];
 
