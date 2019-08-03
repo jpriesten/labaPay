@@ -1,7 +1,7 @@
 <ion-header translucent>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="settings"></ion-back-button>
+      <ion-back-button defaultHref="settings" text="Settings"></ion-back-button>
     </ion-buttons>
 
     <ion-title>Cards</ion-title>
@@ -15,17 +15,34 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding> 
+<ion-content padding fullscreen> 
 
-  <ion-item [routerLink]="['/cards/new']"  button detail lines="none" expand="full">
-    <ion-ripple-effect></ion-ripple-effect>
-    <ion-text color="dark">
-      <h5>
-        No card has been created yet, tab the here to add a new card
-      </h5>
-    </ion-text>
-  </ion-item>
+  <div *ngIf="!cards">
+    <ion-item [routerLink]="['/cards/new']"  button detail lines="none" expand="full">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-text color="dark">
+        <h5>
+          No card has been created yet, tab here to add a new card
+        </h5>
+      </ion-text>
+    </ion-item>
+  </div>
   
+  <div *ngIf="cards">
+    <div *ngFor="let card of cards" class="active-cards">
+      <ion-card>
+        <ion-item button detail lines="full" expand="full">
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          <ion-card-header>
+            <ion-card-title style="font-weight: normal; color: black">{{ card.cardHolderName }}</ion-card-title>
+            <ion-card-subtitle style="font-weight: lighter; font-size: small; color: black">{{ card.accountNumber }}</ion-card-subtitle>
+          </ion-card-header>
+          <!-- <span style="font-size: large; color: black">{{ card.cardHolderName }}</span>
+          <span style="font-weight: bold; font-size: small; color: black">{{ card.accountNumber }}</span> -->
+        </ion-item>
+      </ion-card>
+    </div>
+  </div>
 
 </ion-content>
   

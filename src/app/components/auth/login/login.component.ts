@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit {
       let loggedInUser = await this._authService.login(this.logForm.email.value, this.logForm.password.value);
       console.log("Logged: ", loggedInUser.user.results);
       this._alertService.loader.dismiss();
-      this._alertService.successToast("Log in successfully!");
       this.dismissLogin();
       this._navCtrl.navigateRoot('/send');
     } catch (error) {

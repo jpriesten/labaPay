@@ -1,3 +1,12 @@
 ion-button {
     color: red;
 }
+
+ion-item {
+    --background: #ffffff;
+}
+
+ion-content {
+    --padding-end: 0px;
+    --padding-start: 0px;
+}

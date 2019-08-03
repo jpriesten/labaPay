@@ -34,8 +34,12 @@ export class AlertService {
   }
 
   async processLoader(message: any) {
-    this.loader = await this._loadController.create({
-      message: message
-    });
+    try {
+      this.loader = await this._loadController.create({
+        message: message
+      });
+    } catch (error) {
+      console.error("Error: ", error);
+    }
   }
 }

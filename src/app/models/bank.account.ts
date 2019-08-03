@@ -1,6 +1,6 @@
 export class BankAccount {
     id: String;
-    userId: String;
+    userID: String;
     accountNumber: Number;
     address = {
         country: '',
@@ -8,5 +8,7 @@ export class BankAccount {
         state: '',
         zipcode: ''
     };
-    fullname: String;
+    cardHolderName: String;
+    cardExpiryDate: String;
+    CVV: Number;
 }
