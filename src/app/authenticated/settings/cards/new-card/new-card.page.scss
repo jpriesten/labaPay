@@ -10,3 +10,20 @@ ion-content {
     --padding-end: 0px;
     --padding-start: 0px;
 }
+
+.item_format {
+    font-size:14px;
+}
+
+.validation-errors {
+    // background-color: #ffffff;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+}

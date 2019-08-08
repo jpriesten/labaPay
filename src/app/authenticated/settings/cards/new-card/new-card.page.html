@@ -22,27 +22,65 @@
 
   <ion-item-group>
     <ion-item-divider>
-      <ion-label>Credit/Debit Card</ion-label>
+      <ion-label style="font-size: 16px;">Credit/Debit Card</ion-label>
     </ion-item-divider>
 
     <form [formGroup]="newCardFormGroup">
-      <ion-item>
-        <ion-label position="fixed">Name</ion-label>
-        <ion-input slot="end" type="text" placeholder="John Doe" formControlName="cardHolderName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="fixed">Number</ion-label>
-        <ion-input slot="end" type="number" placeholder="Required" formControlName="accountNumber"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="fixed">Expires</ion-label>
-        <ion-datetime slot="end" placeholder="Month / Year" displayFormat="MM/YY" pickerFormat="MMM YYYY"
-        min="{{ startYear }}" max="{{ endYear }}" formControlName="expiryDate"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label position="fixed">CVV</ion-label>
-        <ion-input slot="end" type="number" placeholder="Security Code" formControlName="securityCode"></ion-input>
-      </ion-item>
+      <ion-list>
+        <ion-item class="item_format">
+          <ion-label position="fixed">Name</ion-label>
+          <ion-input slot="end" type="text" placeholder="John Doe" formControlName="cardHolderName"></ion-input>
+        </ion-item>
+        <div class="validation-errors" *ngIf="newCardFormGroup.get('cardHolderName').touched">
+          <ng-container *ngFor="let validation of validation_messages.cardHolderName">
+            <div class="error-message" *ngIf="newCardFormGroup.get('cardHolderName').hasError(validation.type) && 
+            (newCardFormGroup.get('cardHolderName').dirty || newCardFormGroup.get('cardHolderName').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="item_format">
+          <ion-label position="fixed">Number</ion-label>
+          <ion-input slot="end" type="text" placeholder="Required" formControlName="accountNumber"></ion-input>
+        </ion-item>
+        <div class="validation-errors" *ngIf="newCardFormGroup.get('accountNumber').touched">
+          <ng-container *ngFor="let validation of validation_messages.cardNumber">
+            <div class="error-message" *ngIf="newCardFormGroup.get('accountNumber').hasError(validation.type) && 
+            (newCardFormGroup.get('accountNumber').dirty || newCardFormGroup.get('accountNumber').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        
+        <ion-item class="item_format">
+          <ion-label position="fixed">Expires</ion-label>
+          <ion-datetime placeholder="Month / Year" displayFormat="MM/YY" pickerFormat="MMM YYYY"
+          min="{{ startYear }}" max="{{ endYear }}" formControlName="expiryDate">
+          </ion-datetime>
+        </ion-item>
+        <div class="validation-errors" *ngIf="newCardFormGroup.get('expiryDate').touched">
+          <ng-container *ngFor="let validation of validation_messages.expires">
+            <div class="error-message" *ngIf="newCardFormGroup.get('expiryDate').hasError(validation.type) && 
+            (newCardFormGroup.get('expiryDate').dirty || newCardFormGroup.get('expiryDate').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="item_format">
+          <ion-label position="fixed">Code</ion-label>
+          <ion-input slot="end" type="number" placeholder="Security Code" formControlName="securityCode"></ion-input>
+        </ion-item>
+        <div class="validation-errors" *ngIf="newCardFormGroup.get('securityCode').touched">
+          <ng-container *ngFor="let validation of validation_messages.cvv">
+            <div class="error-message" *ngIf="newCardFormGroup.get('securityCode').hasError(validation.type) && 
+            (newCardFormGroup.get('securityCode').dirty || newCardFormGroup.get('securityCode').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-list>
     </form>
     
   </ion-item-group>

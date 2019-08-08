@@ -30,13 +30,33 @@ export class NewCardPage implements OnInit {
   ngOnInit() {
 
     this.newCardFormGroup = this._formBuilder.group({
-      accountNumber: ['', [Validators.required, Validators.maxLength(13)]],
+      accountNumber: new FormControl('', Validators.compose([Validators.required, Validators.minLength(13),
+        Validators.maxLength(16), Validators.pattern('[0-9]*')])),
       expiryDate: ['', [Validators.required]],
-      securityCode: ['', [Validators.required, Validators.minLength(3)]],
+      securityCode: new FormControl('', Validators.compose([Validators.required, Validators.min(100)])),
       cardHolderName: ['', Validators.required]
     });
 
     this._alert.processLoader('Please wait');
+  }
+
+  validation_messages = {
+    'cardNumber': [
+      { type: 'required', message: 'Card number is required.' },
+      { type: 'minlength', message: 'Card number must be at least 15 characters long.' },
+      { type: 'maxlength', message: 'Card number cannot be more than 16 characters long.' },
+      { type: 'pattern', message: 'Your card number must contain only numbers.' },
+    ],
+    'cvv': [
+      { type: 'required', message: 'Security code is required.' },
+      { type: 'min', message: 'Invalid Security code.' }
+    ],
+    'cardHolderName': [
+      { type: 'required', message: 'Name is required.' }
+    ],
+    'expires': [
+      { type: 'required', message: 'Expiry date is required.' }
+    ]
   }
 
   get cardForm() { return this.newCardFormGroup.controls; }
