@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-back-button defaultHref="/cards" text="Cards"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Card Detail
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button size="small" expand="block" color="primary" strong="true">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-label>
+          Edit
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card *ngIf="card">
+    <img src="/assets/images/visa_2.png" style="background-color: red" width="50%" height="50%">
+    <ion-card-content>
+      <ion-list>
+        <ion-item class="format_input"> 
+          <ion-label position="fixed">Name</ion-label>
+          <ion-input slot="end" readonly>{{ card.cardHolderName }}</ion-input>
+        </ion-item>
+        <ion-item class="format_input"> 
+          <ion-label position="fixed">Number</ion-label>
+          <ion-input slot="end" readonly>{{ card.accountNumber }}</ion-input>
+        </ion-item>
+        <ion-item class="format_input" *ngIf="expiry">
+          <ion-label position="fixed">Expires</ion-label>
+          <ion-input slot="end" readonly>{{ expiry }}</ion-input>
+        </ion-item>
+        <ion-item class="format_input">
+          <ion-label position="fixed">Code</ion-label>
+          <ion-input slot="end" readonly>{{ card.CVV }}</ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

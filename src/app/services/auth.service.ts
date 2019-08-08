@@ -143,7 +143,6 @@ export class AuthService {
         }
       },
       error => {
-        console.log(error);
         if(localStorage.getItem('token')) {
           this.token = localStorage.getItem('token');
           this.isLoggedIn = true;

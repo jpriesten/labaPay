@@ -18,7 +18,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding fullscreen>
 
   <ion-item-group>
     <ion-item-divider>
@@ -28,21 +28,20 @@
     <form [formGroup]="newCardFormGroup">
       <ion-item>
         <ion-label position="fixed">Name</ion-label>
-        <ion-input type="text" placeholder="John Doe" formControlName="cardHolderName"></ion-input>
+        <ion-input slot="end" type="text" placeholder="John Doe" formControlName="cardHolderName"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="fixed">Number</ion-label>
-        <ion-input type="number" placeholder="Required" formControlName="accountNumber"></ion-input>
-        
+        <ion-input slot="end" type="number" placeholder="Required" formControlName="accountNumber"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="fixed">Expires</ion-label>
-        <ion-input type="number" placeholder="MM" formControlName="expiryMonth"></ion-input>
-        <ion-input type="number" placeholder="YYYY" formControlName="expiryYear"></ion-input>
+        <ion-datetime slot="end" placeholder="Month / Year" displayFormat="MM/YY" pickerFormat="MMM YYYY"
+        min="{{ startYear }}" max="{{ endYear }}" formControlName="expiryDate"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="fixed">CVV</ion-label>
-        <ion-input type="number" placeholder="Security Code" formControlName="securityCode"></ion-input>
+        <ion-input slot="end" type="number" placeholder="Security Code" formControlName="securityCode"></ion-input>
       </ion-item>
     </form>
     

@@ -13,6 +13,11 @@ const crypto = new Crypto.default('out-of-the-box');
 })
 export class CardService {
   
+  private headers = new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': this._auth.token
+  });
+
   constructor(
     private _http: HttpClient,
     private _env: EnvService,
@@ -21,16 +26,13 @@ export class CardService {
   ) { }
 
   newCard(accountNumber: String, expiryDate: String, securityCode: String, cardHolderName: String): Promise<BankAccount>  {
-    const headers = new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': this._auth.token
-    });
+    
     let body = {
       'accountNumber': accountNumber, 'cardExpiryDate': expiryDate, 'CVV': securityCode, 'cardHolderName': cardHolderName
     }
 
     return new Promise((resolve, reject) => { 
-      this._http.post<BankAccount>(this._env.API_URL + 'cards/new', body, { headers: headers }).subscribe(response => {
+      this._http.post<BankAccount>(this._env.API_URL + 'cards/new', body, { headers: this.headers }).subscribe(response => {
         if(response['error'] != false) {
           reject(response);
           console.log(response);
@@ -51,13 +53,9 @@ export class CardService {
   }
 
   getCards(): Promise<any>  {
-    const headers = new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': this._auth.token
-    });
 
     return new Promise((resolve, reject) => { 
-      this._http.get<any>(this._env.API_URL + 'cards', { headers: headers }).subscribe(response => {
+      this._http.get<any>(this._env.API_URL + 'cards', { headers: this.headers }).subscribe(response => {
         if(response['error'] != false) {
           reject(response);
           console.log(response);
@@ -70,6 +68,38 @@ export class CardService {
         });
         resolve(decrypted);
 
+      }, errorResponse => {
+        console.log("Errors: ", errorResponse);
+        if(errorResponse.error.code && errorResponse.error.code == 13579) {
+          this._auth.removeToken();
+          this._navCtrl.navigateRoot('/landing');
+          return;
+        }
+        reject(errorResponse.error);
+        return;
+      });
+    });
+  }
+
+  deleteCard(cardNumber: any): Promise<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': this._auth.token
+      }),
+      body: {
+        'cardNumber': cardNumber
+      }
+    };
+
+    return new Promise((resolve, reject) => {
+      this._http.delete<any>(this._env.API_URL + 'card', options).subscribe(response => {
+        if(response['error'] != false) {
+          reject(response);
+          console.log(response);
+          return;
+        }
+        resolve(response);
       }, errorResponse => {
         console.log("Errors: ", errorResponse);
         if(errorResponse.error.code && errorResponse.error.code == 13579) {

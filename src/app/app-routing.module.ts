@@ -42,11 +42,15 @@ const routes: Routes = [
       {
         path: 'new',
         loadChildren: './authenticated/settings/cards/new-card/new-card.module#NewCardPageModule',
+      },
+      {
+        path: 'detail',
+        loadChildren: './authenticated/settings/cards/card-detail/card-detail.module#CardDetailPageModule'
       }
     ]
   },
 
-  { path: '**', redirectTo: 'send', pathMatch: 'full' }
+  { path: '**', redirectTo: 'send', pathMatch: 'full' },
   
 ];
 

@@ -17,6 +17,9 @@ export class NewCardPage implements OnInit {
 
   public createdCard: BankAccount;
 
+  public startYear = new Date(Date.now()).getFullYear();
+  public endYear = Number(this.startYear) + 12;
+
   constructor(
     private _card: CardService,
     private _alert: AlertService,
@@ -27,10 +30,9 @@ export class NewCardPage implements OnInit {
   ngOnInit() {
 
     this.newCardFormGroup = this._formBuilder.group({
-      accountNumber: ['', Validators.compose([Validators.required, Validators.maxLength(13)])],
-      expiryMonth: ['', Validators.compose([Validators.required, Validators.maxLength(2)])],
-      expiryYear: ['', Validators.compose([Validators.required, Validators.maxLength(4)])],
-      securityCode: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      accountNumber: ['', [Validators.required, Validators.maxLength(13)]],
+      expiryDate: ['', [Validators.required]],
+      securityCode: ['', [Validators.required, Validators.minLength(3)]],
       cardHolderName: ['', Validators.required]
     });
 
@@ -42,8 +44,7 @@ export class NewCardPage implements OnInit {
   async newCard() {
     this._alert.loader.present();
     try {
-      let expiryDate = `${this.cardForm.expiryMonth.value}/${this.cardForm.expiryYear.value}`;
-      let response = await this._card.newCard(this.cardForm.accountNumber.value, expiryDate,
+      let response = await this._card.newCard(this.cardForm.accountNumber.value, this.cardForm.expiryDate.value,
         this.cardForm.securityCode.value, this.cardForm.cardHolderName.value);
       this.createdCard = response['result'];
       this._alert.successToast(response['result']);
