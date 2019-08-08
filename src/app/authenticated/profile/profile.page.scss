@@ -1,3 +1,13 @@
+
 ion-card {
-    background: #ffffff;
+    --background: #ffffff;
+}
+
+ion-item {
+    --background: #ffffff;
+    --background-activated: #ffffff;
+}
+
+.format_input{
+    font-size: small;
 }

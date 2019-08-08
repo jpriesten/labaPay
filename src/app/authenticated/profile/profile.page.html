@@ -3,9 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="loggedInUser">
-      <span style="font-size: large">{{ loggedInUser.name }}</span><br>
-      <small style="font-size: small">{{ loggedInUser.email }}</small>
+    <ion-title>
+      Profile
     </ion-title>
 
     <ion-buttons slot="end">
@@ -20,14 +19,31 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-card>
-    <img src="/assets/images/male.png" width="50%" height="50%">
-    <ion-card-header *ngIf="loggedInUser">
+  <ion-card *ngIf="loggedInUser">
+    <img src="/assets/images/male.png" style="background-color: whitesmoke" width="50%" height="50%">
+    <ion-card-header>
       <ion-card-subtitle>{{ loggedInUser.address }}</ion-card-subtitle>
       <ion-card-title>{{ loggedInUser.city }}, {{ loggedInUser.country }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      
+      <ion-list>
+        <ion-item class="format_input"> 
+          <ion-label position="fixed">Name</ion-label>
+          <ion-input slot="end" readonly>{{ loggedInUser.name }}</ion-input>
+        </ion-item>
+        <ion-item class="format_input"> 
+          <ion-label position="fixed">Email</ion-label>
+          <ion-input slot="end" readonly>{{ loggedInUser.email }}</ion-input>
+        </ion-item>
+        <ion-item class="format_input">
+          <ion-label position="fixed">Gender</ion-label>
+          <ion-input slot="end" readonly>{{ loggedInUser.gender == 'm'? 'Male':'Female' }}</ion-input>
+        </ion-item>
+        <ion-item class="format_input">
+          <ion-label position="fixed">Phone</ion-label>
+          <ion-input slot="end" readonly>{{ loggedInUser.phoneNumber }}</ion-input>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>
