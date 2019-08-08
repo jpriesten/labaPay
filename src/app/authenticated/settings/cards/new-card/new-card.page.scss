@@ -15,6 +15,16 @@ ion-content {
     font-size:14px;
 }
 
+.item_format > ion-input {
+    width: 100%; 
+    text-align: right;
+}
+
+.item_format > ion-datetime {
+    width: 100%; 
+    text-align: right;
+}
+
 .validation-errors {
     // background-color: #ffffff;
     padding-left: 10%;
