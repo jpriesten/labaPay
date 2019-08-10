@@ -2,9 +2,9 @@
 
   <ion-toolbar>
 
-    <ion-item [routerLink]="['/profile']" slot="start" button="true" detail="false" lines="none">
+    <ion-item slot="start" button="true" detail="false" lines="none">
       <ion-ripple-effect></ion-ripple-effect>
-      <ion-avatar>
+      <ion-avatar style="background-color: white;" [routerLink]="['/profile']">
         <img src="/assets/images/male.png">
       </ion-avatar>
     </ion-item>
@@ -12,7 +12,7 @@
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/settings']">
         <ion-ripple-effect></ion-ripple-effect>
-        <ion-icon slot="icon-only" name="cog" color="dark"></ion-icon>
+        <ion-icon slot="icon-only" name="cog" color="light"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -23,8 +23,8 @@
 
   <!-- fab placed to the bottom start -->
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button size="small" color="danger">
-      <ion-icon name="paper-plane"></ion-icon> 
+    <ion-fab-button size="small" style="background-color: white;">
+      <ion-icon name="paper-plane" color="light"></ion-icon> 
     </ion-fab-button>
   </ion-fab>
 

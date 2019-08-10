@@ -1,7 +1,7 @@
 <ion-header translucent>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button [routerLink]="['/cards']">
+      <ion-button [routerLink]="['/cards']" color="light">
         <ion-ripple-effect></ion-ripple-effect>
         Cancel
       </ion-button>
@@ -10,7 +10,7 @@
     <ion-title>Bank Card</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button color="primary" type="submit" (click)="newCard()" [disabled]="!newCardFormGroup.valid">
+      <ion-button color="light" type="submit" (click)="newCard()" [disabled]="!newCardFormGroup.valid">
         <ion-ripple-effect></ion-ripple-effect>
         Done
       </ion-button> <!-- (click)="newCard()"  --> 

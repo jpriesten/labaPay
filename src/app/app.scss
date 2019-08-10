@@ -8,13 +8,18 @@
 /* Set variables for all modes */
 :root {
     /* Set the background of the entire app */
+    // --ion-background-color: #ffffff;
     --ion-background-color: #f4f5f8;
-    --ion-backdrop-color: #ffffff;
+    // --ion-backdrop-color: #ffffff;
+    --ion-backdrop-color: rgba(255, 0, 0, 0.333);
   
     /* Set the font family of the entire app */
     --ion-font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Roboto", sans-serif;
   }
-  
+
+  ion-toolbar {
+    --background: rgb(211, 9, 9);
+  }  
   /* Set text color of the entire app for iOS only */
   .ios {
     --ion-text-color: #000;
