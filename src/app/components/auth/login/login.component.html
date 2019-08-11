@@ -6,6 +6,7 @@
 </ion-header>
 <ion-content padding fullscreen>
   <form [formGroup]="loginFormGroup">
+    
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
@@ -22,6 +23,7 @@
     [disabled]="!loginFormGroup.valid">
       Login
     </ion-button>
+    
   </form>
   <p text-center>Don't have a account?</p>
   <ion-button expand="full" color="danger" (click)="registerModal()">Register</ion-button>
