@@ -26,11 +26,21 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     this.loginFormGroup = this._formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
 
     this._alertService.processLoader('Please wait');
+  }
+
+  validation_messages = {
+    'email': [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'email', message: 'Email address not valid.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Password is required.' }
+    ]
   }
 
   get logForm() { return this.loginFormGroup.controls; }

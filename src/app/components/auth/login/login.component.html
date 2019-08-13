@@ -1,30 +1,55 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-button color="light" (click)="dismissLogin()">Close</ion-button>
+
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="dismissLogin()">
+        <ion-ripple-effect></ion-ripple-effect>
+        Close
+      </ion-button>
+    </ion-buttons>
+
     <ion-title>Login</ion-title>
+    
   </ion-toolbar>
 </ion-header>
 <ion-content padding fullscreen>
   <form [formGroup]="loginFormGroup">
+    <ion-list>
+
+      <ion-item class="item_format">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+        <div *ngIf="loginFormGroup.get('email').dirty || loginFormGroup.get('email').touched">
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div class="error-message" *ngIf="loginFormGroup.get('email').hasError(validation.type)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-item>
     
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
-    </ion-item>
+      <ion-item class="item_format">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+        <div *ngIf="loginFormGroup.get('password').dirty || loginFormGroup.get('password').touched">
+          <ng-container *ngFor="let validation of validation_messages.password">
+            <div class="error-message" *ngIf="loginFormGroup.get('password').hasError(validation.type)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-item>
+
+    </ion-list>
   
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item>
-  
-    <p text-right>Forgot Password?</p>
+    <p text-right class="item_format">Forgot Password?</p>
   
     <ion-button type="submit" expand="full" color="primary" (click)="login()"
-    [disabled]="!loginFormGroup.valid">
+    [disabled]="!loginFormGroup.valid" class="item_format">
       Login
     </ion-button>
     
   </form>
-  <p text-center>Don't have a account?</p>
-  <ion-button expand="full" color="danger" (click)="registerModal()">Register</ion-button>
+  <p text-center class="item_format">Don't have a account?</p>
+  <ion-button expand="full" color="danger" (click)="registerModal()" class="item_format">Register</ion-button>
 </ion-content>

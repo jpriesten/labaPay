@@ -29,8 +29,8 @@ export class RegisterComponent implements OnInit {
 
     this.registerFormGroup = this._formBilder.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: [''],
       country: ['', Validators.required],
       city: ['', Validators.required],
@@ -41,6 +41,35 @@ export class RegisterComponent implements OnInit {
 
     this._alertService.processLoader('Please wait');
 
+  }
+
+  validation_messages = {
+    'name': [
+      { type: 'required', message: 'Name is required.'}
+    ],
+    'email': [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'email', message: 'Email address not valid.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Password is required.' },
+      { type: 'minlength', message: 'Password should be at least 8 characters long.' }
+    ],
+    'country': [
+      { type: 'required', message: 'Country is required.'}
+    ],
+    'city': [
+      { type: 'required', message: 'City is required.'}
+    ],
+    'phone': [
+      { type: 'required', message: 'Phone number is required.'}
+    ],
+    'address': [
+      { type: 'required', message: 'Address is required.'}
+    ],
+    'gender': [
+      { type: 'required', message: 'Gender is required.'}
+    ]
   }
 
   get regForm() { return this.registerFormGroup.controls; }
