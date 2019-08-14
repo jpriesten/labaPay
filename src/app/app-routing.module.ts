@@ -44,12 +44,12 @@ const routes: Routes = [
         path: 'detail',
         loadChildren: './authenticated/settings/cards/card-detail/card-detail.module#CardDetailPageModule'
       }
-    ]
+    ],
+    canActivate: [AuthGuard]
   },
 
   { path: '**', redirectTo: 'send', pathMatch: 'full' },
   { path: 'edit-profile', loadChildren: './authenticated/profile/edit-profile/edit-profile.module#EditProfilePageModule' },
-  
 ];
 
 @NgModule({

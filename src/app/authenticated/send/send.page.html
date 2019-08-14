@@ -1,8 +1,8 @@
-<ion-header>
+<ion-header translucent>
 
   <ion-toolbar>
 
-    <ion-item slot="start" button="true" detail="false" lines="none">
+    <ion-item slot="start" button="true" detail="false" lines="none" class="header_item">
       <ion-ripple-effect></ion-ripple-effect>
       <ion-avatar style="background-color: white;" [routerLink]="['/profile']">
         <img src="/assets/images/male.png">
@@ -15,17 +15,27 @@
         <ion-icon slot="icon-only" name="cog" color="light"></ion-icon>
       </ion-button>
     </ion-buttons>
+    
   </ion-toolbar>
   
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
 
-  <!-- fab placed to the bottom start -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button size="small">
-      <ion-icon name="paper-plane" color="light"></ion-icon> 
-    </ion-fab-button>
-  </ion-fab>
+  <ion-tabs>
+    <!-- Tab bar -->
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="debit">
+        <ion-icon name="paper-plane"></ion-icon>
+        <ion-label>Sent</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="credit">
+        <ion-icon name="arrow-dropdown-circle"></ion-icon>
+        <ion-label>Received</ion-label>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 
 </ion-content>

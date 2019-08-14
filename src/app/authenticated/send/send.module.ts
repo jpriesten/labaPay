@@ -10,10 +10,35 @@ import { SendPage } from './send.page';
 const routes: Routes = [
   {
     path: '',
-    component: SendPage
+    component: SendPage,
+    children: [
+      {
+        path: 'credit',
+        children: [
+          {
+            path: '',
+            loadChildren: './authenticated/send/credit/credit.module#CreditPageModule'
+          }
+        ]
+      },
+      {
+        path: 'debit',
+        children: [
+          {
+            path: '',
+            loadChildren: './authenticated/send/debit/debit.module#DebitPageModule'
+          }
+        ]
+      },
+      {
+        path: '',
+        redirectTo: 'debit',
+        pathMatch: 'full'
+      }
+    ]
   }
 ];
-
+  
 @NgModule({
   imports: [
     CommonModule,

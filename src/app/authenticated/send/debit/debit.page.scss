@@ -1,0 +1,24 @@
+
+.avatar_background {
+    background-color: blue;
+}
+
+.avatar_content {
+    color: white; 
+    font-weight: bolder; 
+    margin-top: 9px; 
+    margin-left: 6px;
+}
+
+ion-fab-button {
+    --background: red;
+    --background-activated: rgba(255, 0, 0, 0.333);
+    --background-focused:rgba(255, 0, 0, 0.333);
+    --background-hover: rgba(255, 0, 0, 0.333);
+    --color: #ffffff;
+    --ripple-color: #1e1e1e;
+}
+
+ion-content {
+    --padding-top: 15px;
+}

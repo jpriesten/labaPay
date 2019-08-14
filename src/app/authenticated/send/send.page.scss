@@ -1,12 +1,14 @@
-ion-item {
+
+.header_item {
     --background: rgba(255, 0, 0, 0.333);
 }
 
-ion-fab-button {
-    --background: red;
-    --background-activated: rgba(255, 0, 0, 0.333);
-    --background-focused:rgba(255, 0, 0, 0.333);
-    --background-hover: rgba(255, 0, 0, 0.333);
-    --color: #ffffff;
-    --ripple-color: #1e1e1e;
+ion-tab-bar {
+    --background: #ffffff;
+    --border-radius: 50px;
+    --color: #000000;
+}
+
+ion-badge {
+    --background: #df1414;
 }
