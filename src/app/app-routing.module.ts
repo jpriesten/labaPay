@@ -14,9 +14,6 @@ const routes: Routes = [
   { path: 'register', loadChildren: './components/auth/register/register.module#RegisterModule' },
 
   // Guarded routes
-  { path: 'home', loadChildren: './authenticated/app-tabs/app-tabs.module#AppTabsPageModule',
-    canActivate: [AuthGuard]  
-  },
   {
     path: 'profile',
     loadChildren: './authenticated/profile/profile.module#ProfilePageModule',
@@ -51,6 +48,7 @@ const routes: Routes = [
   },
 
   { path: '**', redirectTo: 'send', pathMatch: 'full' },
+  { path: 'edit-profile', loadChildren: './authenticated/profile/edit-profile/edit-profile.module#EditProfilePageModule' },
   
 ];
 
