@@ -17,7 +17,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './authenticated/send/credit/credit.module#CreditPageModule'
+            loadChildren: './credit/credit.module#CreditPageModule'
           }
         ]
       },
@@ -26,7 +26,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './authenticated/send/debit/debit.module#DebitPageModule'
+            loadChildren: './debit/debit.module#DebitPageModule'
           }
         ]
       },

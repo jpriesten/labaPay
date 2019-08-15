@@ -31,7 +31,7 @@ export class NewCardPage implements OnInit {
 
     this.newCardFormGroup = this._formBuilder.group({
       accountNumber: new FormControl('', Validators.compose([Validators.required, Validators.minLength(13),
-        Validators.maxLength(16), Validators.pattern('[0-9]*')])),
+        Validators.maxLength(16), Validators.pattern('^[4]([0-9]{15}$|[0-9]{12}$)')])),
       expiryDate: ['', [Validators.required]],
       securityCode: new FormControl('', Validators.compose([Validators.required, Validators.min(100)])),
       cardHolderName: ['', Validators.required]
@@ -45,7 +45,7 @@ export class NewCardPage implements OnInit {
       { type: 'required', message: 'Card number is required.' },
       { type: 'minlength', message: 'Card number must be at least 15 characters long.' },
       { type: 'maxlength', message: 'Card number cannot be more than 16 characters long.' },
-      { type: 'pattern', message: 'Your card number must contain only numbers.' },
+      { type: 'pattern', message: 'Your card number must begin with 4 and contain only numbers.' },
     ],
     'cvv': [
       { type: 'required', message: 'Security code is required.' },

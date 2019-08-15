@@ -1,6 +1,11 @@
 <ion-header translucent>
   <ion-toolbar>
     <ion-buttons slot="start">
+      <!-- <ion-button [routerLink]="['/settings']" color="light">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon slot="icon-only" name="arrow-back" color="light"></ion-icon>
+        Settings
+      </ion-button> -->
       <ion-back-button defaultHref="settings" text="Settings" color="light"></ion-back-button>
     </ion-buttons>
 
@@ -15,7 +20,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding fullscreen> 
+<ion-content fullscreen> 
 
   <div *ngIf="!cards">
     <ion-item [routerLink]="['/cards/new']"  button detail lines="none" expand="full">

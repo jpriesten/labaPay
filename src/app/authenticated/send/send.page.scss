@@ -9,6 +9,11 @@ ion-tab-bar {
     --color: #000000;
 }
 
+ion-tab-button {
+    --color-selected: #b93b32;
+    --ripple-color: #8a3903;
+}
+
 ion-badge {
     --background: #df1414;
 }
