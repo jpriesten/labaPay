@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Sending</ion-title>
+    
+    <ion-buttons slot="end">
+      <ion-button size="small" expand="block" color="light" strong="true" (click)="dismissModal()">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-label style="font-weight: bolder;">
+          Close
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Input</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Toggle</ion-label>
+      <ion-toggle slot="end"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Radio</ion-label>
+      <ion-radio slot="end"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Checkbox</ion-label>
+      <ion-checkbox slot="start"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

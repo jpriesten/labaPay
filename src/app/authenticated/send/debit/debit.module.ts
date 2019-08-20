@@ -6,11 +6,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DebitPage } from './debit.page';
+import { ProcessDebitPage } from './process-debit/process-debit.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: DebitPage
+    component: DebitPage,
+    children: [
+      {
+        path: 'process_debit',
+        children: [
+          {
+            path: '',
+            loadChildren: './process-debit/process-debit.module#ProcessDebitPageModule'
+          }
+        ]
+      }
+    ]
   }
 ];
 
@@ -21,6 +33,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DebitPage]
+  declarations: [DebitPage, ProcessDebitPage],
+  entryComponents: [ProcessDebitPage]
 })
 export class DebitPageModule {}

@@ -50,6 +50,7 @@ const routes: Routes = [
 
   { path: '**', redirectTo: 'send', pathMatch: 'full' },
   { path: 'edit-profile', loadChildren: './authenticated/profile/edit-profile/edit-profile.module#EditProfilePageModule' },
+  // { path: 'process-debit', loadChildren: './authenticated/send/debit/process-debit/process-debit.module#ProcessDebitPageModule' },
 ];
 
 @NgModule({
